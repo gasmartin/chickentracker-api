@@ -1,3 +1,6 @@
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
+
 const Profile = require('../models/Profile');
 
 module.exports = {
@@ -14,9 +17,9 @@ module.exports = {
             });
         }
 
-        if (profile.password != password) {
+        if (!bcrypt.compareSync(password, profile.password)) {
             return res.status(400).json({ 
-                error: 'Password is incorrect' 
+                error: 'Password doesn\'t match' 
             });
         }
 
@@ -26,8 +29,10 @@ module.exports = {
     async store(req, res) {
         const { name, email, username, password } = req.body;
 
+        const hashPassword = bcrypt.hashSync(password, saltRounds);
+
         const profile = await Profile.create({ 
-            name, email, username, password 
+            name, email, username, password: hashPassword
         });
 
         return res.json(profile);
