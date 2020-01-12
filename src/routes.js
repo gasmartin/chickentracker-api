@@ -8,6 +8,7 @@ routes.get('/', (req, res) => {
     return res.json({ hello: 'World!' });
 });
 
+routes.post('/profiles/login', ProfileController.auth);
 routes.post('/profiles', ProfileController.store);
 
 module.exports = routes;
