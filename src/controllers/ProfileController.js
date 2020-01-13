@@ -32,6 +32,22 @@ module.exports = {
         return res.status(200).json({ auth: true, token });
     },
 
+    async get(req, res) {
+        const id = req.id;
+
+        const profile = await Profile.findByPk(id);
+
+        return res.status(200).json(profile);
+    },
+
+    async getByProfileId(req, res) {
+        const { id } = req.params;
+
+        const profile = await Profile.findByPk(id);
+
+        return res.status(200).json(profile);
+    },
+
     async store(req, res) {
         const { name, email, username, password } = req.body;
 
@@ -41,8 +57,30 @@ module.exports = {
             name, email, username, password: hashPassword
         });
 
+        const token = generateToken(profile.id);
+
         return res.status(400).json({
             auth: true, token, profile
         });
+    },
+
+    async update(req, res) {
+        const id = req.id;
+        const { name, email, username, password } = req.body;
+
+        await Profile.update(
+            { name, email, username, password },
+            { where: { id } }
+        );
+
+        return res.status(200).json({ message: 'Ok' });
+    },
+
+    async destroy(req, res) {
+        const id = req.id;
+
+        await Profile.destroy({ where: { id } });
+
+        return res.status(200).json({ message: 'Ok' });
     }
 };

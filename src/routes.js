@@ -11,9 +11,10 @@ routes.post('/profiles', ProfileController.store);
 
 routes.use('/', verifyToken);
 
-// Outras rotas aqui embaixo
-routes.use('/', (req, res) => {
-    return res.status(200).json({ message: 'Ok' });
-});
+routes.get('/profiles', ProfileController.get);
+routes.put('/profiles', ProfileController.update);
+routes.delete('/profiles', ProfileController.destroy);
+
+routes.get('/profiles/:id', ProfileController.getByProfileId);
 
 module.exports = routes;
