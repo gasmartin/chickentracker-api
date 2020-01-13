@@ -59,7 +59,7 @@ module.exports = {
 
         const token = generateToken(profile.id);
 
-        return res.status(400).json({
+        return res.status(200).json({
             auth: true, token, profile
         });
     },
