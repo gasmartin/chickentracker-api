@@ -1,6 +1,8 @@
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
+const { generateToken } = require('../security/token');
+
 const Profile = require('../models/Profile');
 
 module.exports = {
@@ -13,17 +15,21 @@ module.exports = {
 
         if (!profile) {
             return res.status(400).json({ 
+                auth: false,
                 error: 'Username not found' 
             });
         }
 
         if (!bcrypt.compareSync(password, profile.password)) {
             return res.status(400).json({ 
+                auth: false,
                 error: 'Password doesn\'t match' 
             });
         }
 
-        return res.status(200).json(profile);
+        const token = generateToken(profile.id);
+
+        return res.status(200).json({ auth: true, token });
     },
 
     async store(req, res) {
@@ -35,6 +41,8 @@ module.exports = {
             name, email, username, password: hashPassword
         });
 
-        return res.json(profile);
+        return res.status(400).json({
+            auth: true, token, profile
+        });
     }
 };
