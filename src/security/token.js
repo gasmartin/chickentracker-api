@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 
-if (process.env.NODE_ENV != 'development') {
+if (process.env.NODE_ENV != 'production') {
     require('dotenv/config');
 }
 const { SECRET_KEY } = process.env;
