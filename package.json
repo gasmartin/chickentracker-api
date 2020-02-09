@@ -2,6 +2,7 @@
   "name": "chickentracker-api",
   "version": "1.0.0",
   "engines": {
+    "node": "12.14.1",
     "yarn": "1.21.1"
   },
   "main": "server.js",
@@ -13,7 +14,6 @@
   "dependencies": {
     "bcrypt": "^3.0.7",
     "cors": "^2.8.5",
-    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "pg": "^7.18.1",
@@ -22,6 +22,7 @@
     "uuid": "^3.3.3"
   },
   "devDependencies": {
+    "dotenv": "^8.2.0",
     "nodemon": "^2.0.2",
     "sequelize-cli": "^5.5.1"
   }

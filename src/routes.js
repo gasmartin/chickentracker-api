@@ -9,11 +9,11 @@ const routes = express.Router();
 routes.post('/profiles/login', ProfileController.auth);
 routes.post('/profiles', ProfileController.store);
 
-routes.use('/', verifyToken);
-
 routes.get('/teste', (req, res) => {
     return res.json({ msg: 'ok!' });
 });
+
+routes.use('/', verifyToken);
 
 routes.get('/profiles', ProfileController.get);
 routes.put('/profiles', ProfileController.update);
