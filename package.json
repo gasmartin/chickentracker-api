@@ -9,7 +9,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "nodemon src/server.js",
-    "heroku-postbuild": "yarn add --prod"
+    "heroku-postbuild": "yarn install --prod"
   },
   "dependencies": {
     "bcrypt": "^3.0.7",
