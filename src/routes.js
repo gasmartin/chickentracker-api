@@ -11,6 +11,10 @@ routes.post('/profiles', ProfileController.store);
 
 routes.use('/', verifyToken);
 
+routes.get('/teste', (req, res) => {
+    return res.json({ msg: 'ok!' });
+});
+
 routes.get('/profiles', ProfileController.get);
 routes.put('/profiles', ProfileController.update);
 routes.delete('/profiles', ProfileController.destroy);

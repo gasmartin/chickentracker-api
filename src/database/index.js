@@ -5,7 +5,11 @@ const Profile = require('../models/Profile');
 
 const dbConfig = require('../config/database');
 
-const connection = new Sequelize(dbConfig);
+let connection = new Sequelize(dbConfig.development);
+
+if (process.env.NODE_ENV == 'production') {
+    connection = new Sequelize(dbConfig.production);
+}
 
 Profile.init(connection);
 
