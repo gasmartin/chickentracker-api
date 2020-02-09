@@ -1,6 +1,8 @@
 const jwt = require('jsonwebtoken');
 
-require('dotenv/config');
+if (process.env.NODE_ENV != 'development') {
+    require('dotenv/config');
+}
 const { SECRET_KEY } = process.env;
 
 const generateToken = (id) => {
